@@ -78,7 +78,6 @@ public class TaskService {
         return null; // Retorna null se a tarefa não for encontrada
     }
 
-
     public boolean deleteTask(Long taskId) {
         if (taskRepository.existsById(taskId)) {
             taskRepository.deleteById(taskId);

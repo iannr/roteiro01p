@@ -4,6 +4,7 @@ import { createTask, getTasks, updateTask, deleteTask } from './services/api';
 function App() {
     const [taskName, setTaskName] = useState('');
     const [taskDescription, setTaskDescription] = useState('');
+    const [taskPriority, setTaskPriority] = useState('Baixa');
     const [tasks, setTasks] = useState([]);
     const [successMessage, setSuccessMessage] = useState('');
     const [editMode, setEditMode] = useState(false);
@@ -27,9 +28,10 @@ function App() {
             handleUpdateTask();
         } else {
             try {
-                await createTask({ name: taskName, description: taskDescription });
+                await createTask({ name: taskName, description: taskDescription, priority: taskPriority });
                 setTaskName('');
                 setTaskDescription('');
+                setTaskPriority('Baixa');
                 setSuccessMessage('Tarefa criada com sucesso');
                 setTimeout(() => {
                     setSuccessMessage('');
@@ -43,9 +45,10 @@ function App() {
 
     const handleUpdateTask = async () => {
         try {
-            await updateTask(taskIdToEdit, { name: taskName, description: taskDescription });
+            await updateTask(taskIdToEdit, { name: taskName, description: taskDescription, priority: taskPriority });
             setTaskName('');
             setTaskDescription('');
+            setTaskPriority('Baixa');
             setEditMode(false);
             setTaskIdToEdit(null);
             setSuccessMessage('Tarefa atualizada com sucesso');
@@ -61,6 +64,7 @@ function App() {
     const handleEditTask = (task) => {
         setTaskName(task.name);
         setTaskDescription(task.description);
+        setTaskPriority(task.priority);
         setEditMode(true);
         setTaskIdToEdit(task.id);
     };
@@ -96,6 +100,15 @@ function App() {
                     rows={4}
                     style={styles.textarea}
                 />
+                <select
+                    value={taskPriority}
+                    onChange={(e) => setTaskPriority(e.target.value)}
+                    style={styles.select}
+                >
+                    <option value="Baixa">Baixa</option>
+                    <option value="Média">Média</option>
+                    <option value="Alta">Alta</option>
+                </select>
                 <button onClick={handleCreateTask} style={styles.button}>
                     {editMode ? 'Atualizar Tarefa' : 'Criar Tarefa'}
                 </button>
@@ -106,7 +119,7 @@ function App() {
                     {tasks.map(task => (
                         <li key={task.id} style={styles.taskItem}>
                             <div>
-                                <strong>{task.name}</strong>: {task.description}
+                                <strong>{task.name}</strong>: {task.description} ({task.priority})
                             </div>
                             <div>
                                 <button onClick={() => handleEditTask(task)} style={styles.editButton}>
@@ -130,83 +143,108 @@ const styles = {
         justifyContent: 'center',
         alignItems: 'center',
         height: '100vh',
-        backgroundColor: '#1e1e1e',
-        color: '#f1f1f1',
+        backgroundColor: '#f0f0f0',
+        color: '#333',
+        padding: '20px',
     },
     formContainer: {
-        width: '400px',
-        padding: '20px',
-        borderRadius: '10px',
-        boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
-        backgroundColor: '#2e2e2e',
+        width: '100%',
+        maxWidth: '500px',
+        padding: '30px',
+        borderRadius: '15px',
+        boxShadow: '0 8px 16px rgba(0,0,0,0.2)',
+        backgroundColor: '#fff',
     },
     title: {
         textAlign: 'center',
-        marginBottom: '20px',
+        marginBottom: '25px',
+        color: '#007bff',
+        fontSize: '24px',
     },
     input: {
         width: '100%',
-        marginBottom: '10px',
-        padding: '10px',
-        borderRadius: '5px',
-        border: '1px solid #555',
-        backgroundColor: '#3e3e3e',
-        color: '#f1f1f1',
+        marginBottom: '15px',
+        padding: '12px',
+        borderRadius: '10px',
+        border: '1px solid #ccc',
+        backgroundColor: '#f9f9f9',
+        color: '#333',
+        fontSize: '16px',
     },
     textarea: {
         width: '100%',
-        marginBottom: '10px',
-        padding: '10px',
-        borderRadius: '5px',
-        border: '1px solid #555',
-        backgroundColor: '#3e3e3e',
-        color: '#f1f1f1',
+        marginBottom: '15px',
+        padding: '12px',
+        borderRadius: '10px',
+        border: '1px solid #ccc',
+        backgroundColor: '#f9f9f9',
+        color: '#333',
+        fontSize: '16px',
+    },
+    select: {
+        width: '100%',
+        marginBottom: '15px',
+        padding: '12px',
+        borderRadius: '10px',
+        border: '1px solid #ccc',
+        backgroundColor: '#f9f9f9',
+        color: '#333',
+        fontSize: '16px',
     },
     button: {
         width: '100%',
-        padding: '10px',
-        borderRadius: '5px',
+        padding: '12px',
+        borderRadius: '10px',
         border: 'none',
         backgroundColor: '#007bff',
         color: '#fff',
         cursor: 'pointer',
+        fontSize: '16px',
+        transition: 'background-color 0.3s',
+    },
+    buttonHover: {
+        backgroundColor: '#0056b3',
     },
     successMessage: {
         color: 'green',
-        marginTop: '10px',
+        marginTop: '15px',
         textAlign: 'center',
+        fontSize: '16px',
     },
     taskList: {
-        marginTop: '20px',
+        marginTop: '30px',
         padding: '0',
         listStyleType: 'none',
     },
     taskItem: {
-        marginBottom: '10px',
-        padding: '10px',
-        backgroundColor: '#4e4e4e',
-        borderRadius: '5px',
+        marginBottom: '15px',
+        padding: '15px',
+        backgroundColor: '#f0f0f0',
+        borderRadius: '10px',
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
-        border: 'none',  // Removendo qualquer borda extra
+        border: '1px solid #ddd',
+        boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
     },
     editButton: {
         marginRight: '10px',
-        padding: '5px',
+        padding: '8px',
         backgroundColor: '#ffc107',
         color: '#fff',
         border: 'none',
-        borderRadius: '3px',
+        borderRadius: '5px',
         cursor: 'pointer',
+        fontSize: '14px',
     },
     deleteButton: {
-        padding: '5px',
+        padding: '8px',
         backgroundColor: '#dc3545',
         color: '#fff',
         border: 'none',
-        borderRadius: '3px',
+        borderRadius: '5px',
         cursor: 'pointer',
+        fontSize: '14px',
     },
 };
 

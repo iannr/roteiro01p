@@ -1,39 +1,48 @@
-/*body {*/
-/*  margin: 0;*/
-/*  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;*/
-/*  -webkit-font-smoothing: antialiased;*/
-/*  -moz-osx-font-smoothing: grayscale;*/
-/*  background-color: #f0f0f0; !* Cor de fundo suave *!*/
-/*  color: #333; !* Cor principal de texto *!*/
-/*  display: flex; !* Utiliza flexbox para layout *!*/
-/*  justify-content: center; !* Centraliza horizontalmente *!*/
-/*  align-items: center; !* Centraliza verticalmente *!*/
-/*  height: 100vh; !* Altura total da viewport *!*/
-/*}*/
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f0f0f0; /* Cor de fundo mais clara */
+  color: #333; /* Cor principal de texto */
+  display: flex; /* Utiliza flexbox para layout */
+  justify-content: center; /* Centraliza horizontalmente */
+  align-items: center; /* Centraliza verticalmente */
+  height: 100vh; /* Altura total da viewport */
+  padding: 20px; /* Adiciona padding para garantir espaçamento */
+}
 
-/*form {*/
-/*  background-color: #fff; !* Fundo branco para o formulário *!*/
-/*  padding: 20px;*/
-/*  border-radius: 8px; !* Cantos arredondados *!*/
-/*  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); !* Sombra suave *!*/
-/*  width: 300px; !* Largura do formulário *!*/
-/*}*/
+form {
+  background-color: #fff; /* Fundo branco para o formulário */
+  padding: 30px;
+  border-radius: 15px; /* Cantos mais arredondados */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra mais pronunciada */
+  width: 100%;
+  max-width: 500px; /* Largura máxima do formulário */
+}
 
-/*input[type="text"], button {*/
-/*  width: calc(100% - 16px); !* Largura total menos o padding *!*/
-/*  margin-bottom: 10px; !* Espaçamento inferior entre elementos *!*/
-/*}*/
+input[type="text"], textarea, select, button {
+  width: calc(100% - 24px); /* Largura total menos o padding */
+  margin-bottom: 15px; /* Espaçamento inferior entre elementos */
+  padding: 12px;
+  border-radius: 10px; /* Cantos mais arredondados */
+  border: 1px solid #ccc; /* Borda cinza clara */
+  background-color: #f9f9f9; /* Fundo cinza claro */
+  color: #333; /* Texto escuro */
+  font-size: 16px; /* Tamanho da fonte */
+}
 
-/*button {*/
-/*  background-color: #007bff; !* Cor de fundo azul *!*/
-/*  color: #fff; !* Cor do texto branco *!*/
-/*  border: none; !* Sem borda *!*/
-/*  cursor: pointer; !* Cursor de ponteiro ao passar o mouse *!*/
-/*  padding: 10px 0; !* Espaçamento interno *!*/
-/*  font-size: 1em; !* Tamanho de fonte *!*/
-/*  border-radius: 4px; !* Cantos arredondados *!*/
-/*}*/
+button {
+  background-color: #007bff; /* Cor de fundo azul */
+  color: #fff; /* Cor do texto branco */
+  border: none; /* Sem borda */
+  cursor: pointer; /* Cursor de ponteiro ao passar o mouse */
+  padding: 12px 0; /* Espaçamento interno */
+  font-size: 16px; /* Tamanho de fonte */
+  border-radius: 10px; /* Cantos mais arredondados */
+  transition: background-color 0.3s; /* Transição suave para a cor de fundo */
+}
 
-/*button:hover {*/
-/*  background-color: #0056b3; !* Cor de fundo mais escura ao passar o mouse *!*/
-/*}*/
+button:hover {
+  background-color: #0056b3; /* Cor de fundo mais escura ao passar o mouse */
+}
